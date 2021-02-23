@@ -14,14 +14,16 @@ RSpec.describe 'Task', type: :system do
         expect(current_path).to eq project_tasks_path(project)
       end
 
-      xit 'Project詳細からTask一覧ページにアクセスした場合、Taskが表示されること' do
+      it 'Project詳細からTask一覧ページにアクセスした場合、Taskが表示されること' do
         # FIXME: テストが失敗するので修正してください
         task
         visit project_path(project)
         click_link 'View Todos'
-        expect(page).to have_content task.title
-        expect(Task.count).to eq 1
-        expect(current_path).to eq project_tasks_path(project)
+        within_window(windows.last) do
+          expect(page).to have_content task.title
+          expect(Task.count).to eq 1
+          expect(current_path).to eq project_tasks_path(project)
+        end
       end
     end
   end
