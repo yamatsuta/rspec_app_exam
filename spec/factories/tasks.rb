@@ -10,5 +10,6 @@ FactoryBot.define do
       status { :done }
       completion_date { Time.current.yesterday }
     end
+    association :project
   end
 end
